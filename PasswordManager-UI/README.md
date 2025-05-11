@@ -1,27 +1,105 @@
-# PasswordManagerUI
+───────────────────────────────────────────── PERSONAL PASSWORD MANAGER – README ─────────────────────────────────────────────
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+OVERVIEW: This is a secure personal password manager application developed as two separate projects:
 
-## Development server
+Backend API using C# .NET 8
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Frontend Web Application using Angular and TypeScript
 
-## Code scaffolding
+The backend uses SQL Server (running in Docker) to store encrypted passwords, while the frontend interacts with the API for password operations.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+───────────────────────────────────────────── TECHNOLOGY STACK: ───────────────────────────────────────────── Backend:
 
-## Build
+.NET 8 (ASP.NET Core Web API)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Entity Framework Core (Database-First)
 
-## Running unit tests
+SQL Server (in Docker container)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Swagger for API documentation
 
-## Running end-to-end tests
+Frontend:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Angular
 
-## Further help
+TypeScript
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+HTML/CSS for responsive design
+
+───────────────────────────────────────────── BACKEND FEATURES: ───────────────────────────────────────────── API Endpoints:
+
+Passwords: GET /api/Passwords
+
+POST /api/Passwords
+
+GET /api/Passwords/{id}
+
+PUT /api/Passwords/{id}
+
+DELETE /api/Passwords/{id}
+
+GET /api/Passwords/by-username/{userName}
+
+Password Format (Sample): { "id": 10, "category": "Social Media", "app": "Instagram", "userName": "jane_doe_87", "encryptedPassword": "UEBzc3cwcmQyMDI1MTIxMjMxMjM=" }
+
+Security:
+
+Passwords stored using Base64 encoding (ASCII ⇄ Base64)
+
+Database:
+
+SQL Server hosted in Docker
+
+Connected using Entity Framework Core (DB-First approach)
+
+───────────────────────────────────────────── FRONTEND FEATURES: ─────────────────────────────────────────────
+
+List all passwords
+
+View specific password (with option to decrypt)
+
+Add new password
+
+Edit and update existing password (shown decrypted)
+
+Delete password from list
+
+Responsive UI with form validations
+
+Communicates with backend API for all data operations
+
+───────────────────────────────────────────── SETUP INSTRUCTIONS: ─────────────────────────────────────────────
+
+1)START SQL SERVER IN DOCKER:
+
+Make sure you have Docker Desktop installed and running properly. Then, run the following command in the Command Prompt (CMD) to create an instance of SQL Server in Docker
+
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=dinesh@1010" -p 1433:1433 --name sqlserver-container -d mcr.microsoft.com/mssql/server:2022-latest
+
+"ConnectionStrings": { "DefaultConnection": "Server=localhost,1433;Database=PasswordManager;User Id=sa;Password=dinesh@1010;" }
+
+Open SQL Server and connect the database instance which we created in the docker, then run the below query.
+
+CREATE DATABASE PasswordManager; CREATE TABLE Passwords ( Id INT PRIMARY KEY IDENTITY, Category NVARCHAR(100), App NVARCHAR(100), UserName NVARCHAR(255), EncryptedPassword NVARCHAR(MAX) );
+
+2)BACKEND SETUP:
+
+Navigate to the backend folder
+
+dotnet restore dotnet run Press F5 to host.
+
+Open your browser and visit: http://localhost:5066/swagger/index.html
+
+3)FRONTEND SETUP:
+
+Navigate to the frontend folder
+
+Run the following commands:
+
+npm install (or try) npm install --legacy-peer-deps
+
+ng serve
+
+Open your browser and visit: http://localhost:4200
+
+───────────────────────────────────────────── END OF README ─────────────────────────────────────────────
