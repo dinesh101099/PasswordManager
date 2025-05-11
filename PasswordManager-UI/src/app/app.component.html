@@ -1,0 +1,20 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="logo">🔐 Password Manager</div>
+    <nav class="menu">
+      <a routerLink="/" routerLinkActive="active">Password List</a>
+      <a routerLink="/view" routerLinkActive="active">View Password</a>
+      <a routerLink="/add" routerLinkActive="active">Add Password</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <!-- <header class="header">
+      <h1>{{ title }}</h1>
+    </header> -->
+
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
