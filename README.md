@@ -135,7 +135,10 @@ Navigate to the frontend folder
 
 Run the following commands:
 
-npm install
+npm install 
+(or try)
+npm install --legacy-peer-deps
+
 ng serve
 
 Open your browser and visit: http://localhost:4200
